@@ -1,3 +1,4 @@
+import 'package:aya_braitea/data/questions.dart';
 import 'package:flutter/material.dart';
 import '../models/quiz_question.dart';
 
@@ -15,12 +16,15 @@ class QuestionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentQuestion = questions[questionIndex];
     return Padding(
       padding: const EdgeInsets.only(bottom: 25),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Question Text Goes Here",
+           currentQuestion.text,
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 18,
@@ -29,6 +33,17 @@ class QuestionItem extends StatelessWidget {
           ),
 
           const SizedBox(height: 10),
+          ...currentQuestion.answers.map((answer){
+            return Container(
+              width: 200,
+              child: ElevatedButton(onPressed :onSelectAnswer, child:
+              Text(answer)),
+
+            );
+
+
+          }
+         
         ],
       ),
     );
